@@ -11,14 +11,14 @@ To donwload the csv file yourself: [link](
     "https://www.ecdc.europa.eu/en/publications-data/download-todays-data-geographic-distribution-covid-19-cases-worldwide\n",
     )
 
-**Corona Class**
+**[Corona Class](./corona)**
 
 **Notebook(s)**
-- corona_19_visualization.ipynb
+- [corona_19_visualization](./corona_19_visualization.ipynb)
     - Pull the latest data from ECDC and plot some charts
 
 **Script(s)**
-- run_and_upload.sh
+- [run_and_upload.sh](./scripts/run_and_upload.sh)
     - bash script to run corona_19_visualization.ipynb
-- scheduled_run.sh
+- [scheduled_run.sh](./scripts/scheduled_run.sh)
     - bash script to run on a 12 hr schedule
