@@ -9,5 +9,5 @@ mv ./corona_19_visualization.nbconvert.ipynb ./corona_19_visualization.ipynb
 
 # push up to git
 git add ./corona_19_visualization.ipynb
-git commit -am 'schedule run: corona_19_visualization.ipynb'
+git commit -am 'scheduled run: corona_19_visualization.ipynb'
 git push
