@@ -12,6 +12,7 @@ def pull_latest_data(
 
     Parameters
     ----------
+    verbose: bool (default: True)
     uri: http str
         location of latest dataset
 
@@ -38,13 +39,41 @@ def pull_latest_data(
 
 
 def correct_date_format(df, input_column, input_format, output_column):
+    """
+    Correct dt format to dt
+
+    Parameters
+    ----------
+    df: pandas df
+    input_column: str
+        input date column name
+    input_format: str
+        input date format str
+    output_column: str
+        output column name
+
+    Returns
+    -------
+        df[{output_column}]
+    """
     df[output_column] = df[input_column].apply(
         lambda x: datetime.datetime.strptime(x, input_format)
     )
     return df
 
 
-def convert_camel_case(df,):
+def convert_camel_case(df):
+    """
+    Convert all header from camelCase ot lower_under_score_case.
+
+    Parameters
+    ----------
+    df: pandas df
+
+    Returns
+    -------
+        The same df
+    """
 
     key_list = list(df.keys())
     rename_dict = {}
@@ -54,6 +83,17 @@ def convert_camel_case(df,):
 
 
 def integrate_numbers(array):
+    """
+    Integrate an 1-d array into a 1-d array of the same length, but with sequential accumulation.
+
+    Parameters
+    ----------
+    array: 1-d numeric array
+
+    Returns
+    -------
+        1-d numeirc array
+    """
     integrated_array = None
     for elem in array:
         if integrated_array is None:
@@ -64,6 +104,17 @@ def integrate_numbers(array):
 
 
 def generate_list(str):
+    """
+    Identify if an obj is a str or [str] and return a [str].
+
+    Parameters
+    ----------
+    str: str or [str]
+
+    Returns
+    -------
+        [str]
+    """
     if type(str) is not list:
         str_list = [str]
     else:
