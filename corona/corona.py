@@ -63,3 +63,35 @@ class Corona(object):
                     mask, f"cumulative_{input}"
                 ] = self.utils.integrate_numbers(self.data.loc[mask, input])
         print("done.\n")
+
+    def plot_data(self, fontsize=14):
+        initial_y_list = [
+            "cases",
+            "deaths",
+        ]
+        per_cap_y_list = [elem + "_per_capita" for elem in initial_y_list]
+        cumulative_y_list = ["cumulative_" + elem for elem in initial_y_list]
+        cumulative_per_cap_y_list = [elem + "_per_capita" for elem in cumulative_y_list]
+
+        for y_list in [
+            cumulative_y_list,
+            cumulative_per_cap_y_list,
+            initial_y_list,
+            per_cap_y_list,
+        ]:
+            subset_country_list = [
+                "United_States_of_America",
+                "Taiwan",
+                "Italy",
+                "Spain",
+                "Germany",
+                "China",
+            ]
+            self.plotting_utils.plot_time_series(
+                data=self.data.query("countries_and_territories in @subset_country_list"),
+                x="date",
+                y=y_list,
+                ax_factor="countries_and_territories",
+                fontsize=fontsize,
+            )
+            print("\n\n")
