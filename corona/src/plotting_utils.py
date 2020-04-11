@@ -41,5 +41,4 @@ def plot_time_series(data, x, y, ax_factor, fontsize):
         num += 1
     plt.tight_layout(pad=3.0)
 
-    # plt.suptitle(" & ".join(y_list).replace('_', ' ') + f" by {ax_factor.replace('_', ' ')}", fontsize=fontsize, verticalalignment="top")
     return plt.show()
