@@ -8,8 +8,8 @@ This report uses data from the European Centre for Disease Prevention and Contro
     )
     
 To donwload the csv file yourself: [link](
-    "https://www.ecdc.europa.eu/en/publications-data/download-todays-data-geographic-distribution-covid-19-cases-worldwide\n",
-    )
+https://www.ecdc.europa.eu/en/publications-data/download-todays-data-geographic-distribution-covid-19-cases-worldwide
+)
 
 **[Corona Class](./corona)**
 
