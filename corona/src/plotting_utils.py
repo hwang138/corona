@@ -9,9 +9,27 @@ from corona.src import utils
 warnings.filterwarnings("ignore")
 
 
-def plot_time_series(data, x, y, ax_factor, fontsize):
+def plot_time_series(df, x, y, ax_factor, fontsize):
+    """
+    Plot df
+    
+    Parameters
+    ----------
+    df: pandas df
+    x: str
+        x-axis column
+    y: str
+        y-axis column
+    ax_factor: str
+        color factor column
+    fontsize: int
 
-    df = data
+    Returns
+    -------
+        returns a plot
+    """
+
+    df = df
     y_list = utils.generate_list(y)
 
     factor_list = list(df.sort_values(by=y, ascending=False)[ax_factor].unique())
