@@ -1,3 +1,6 @@
+# Description: Scheduled script to run run_and_upload.sh
+# Author: Chris Hwang
+
 iter=0
 while (( $iter < 1 ))
 do
