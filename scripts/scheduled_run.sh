@@ -1,8 +1,7 @@
 iter=0
 while (( $iter < 1 ))
 do
-  bash ./scripts/upload.sh
-  echo "upload complete"
+  bash ./scripts/run_and_upload.sh
   # sleep for 12 hrs
   sleep 43200
 done
