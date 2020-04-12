@@ -32,6 +32,15 @@ class Corona(object):
             by=[self.globals.COUNTRY_COLUMN, self.globals.DATE_COLUMN]
         )
 
+        global_df = (
+            self.data.groupby(self.globals.DATE_COLUMN)
+            .agg({"cases": "sum", "deaths": "sum", "pop_data2018": "sum"})
+            .reset_index()
+        )
+        global_df[self.globals.COUNTRY_COLUMN] = "Global"
+
+        self.data = pd.concat([self.data, global_df])
+
         self._integrate_numbers_by_country(input_column=self.globals.VALUE_COLUMN_LIST)
 
     def _integrate_numbers_by_country(self, input_column):
@@ -84,39 +93,28 @@ class Corona(object):
         max_date_min_d = self.data[self.globals.DATE_COLUMN].max() - timedelta(
             days=day_range
         )
-        global_df = (
-            self.data.query(f"{self.globals.DATE_COLUMN} > @max_date_min_d")
-            .groupby(self.globals.DATE_COLUMN)
-            .agg({"cases": "sum", "deaths": "sum"})
-            .reset_index()
-        )
-        global_df[self.globals.COUNTRY_COLUMN] = "Global"
 
-        country_list = self.globals.COUNTRY_LIST
+        country_list = self.globals.COUNTRY_LIST + ["Global"]
         by_country_df = (
             # subset from data
             self.data.query(
                 f"{self.globals.DATE_COLUMN} > @max_date_min_d"
                 f" & {self.globals.COUNTRY_COLUMN} in @country_list"
             )
-            .sort_values(
-                by=[self.globals.COUNTRY_COLUMN, self.globals.DATE_COLUMN],
-                ascending=False,
-            )
-            .reset_index()
-        )
-        return (
-            pd.concat([global_df, by_country_df])
-            # extract columns of interest
-            [
-                self.globals.DATE_COLUMN,
-                self.globals.COUNTRY_COLUMN,
-                "cases",
-                "cumulative_cases",
-                "deaths",
-                "cumulative_deaths",
+            .sort_values(by=["cumulative_cases"], ascending=False,)
+            .reset_index()[  # extract columns of interest
+                [
+                    self.globals.DATE_COLUMN,
+                    self.globals.COUNTRY_COLUMN,
+                    "cases",
+                    "cumulative_cases",
+                    "deaths",
+                    "cumulative_deaths",
+                ]
             ]
         )
+
+        return by_country_df
 
     def plot_data(self, fontsize=14, day_range=None):
         """
