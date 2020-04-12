@@ -1,4 +1,7 @@
 from datetime import timedelta
+
+import pandas as pd
+
 from corona.src import corona_gobals
 from corona.src import plotting_utils
 from corona.src import utils
@@ -29,9 +32,7 @@ class Corona(object):
             by=[self.globals.COUNTRY_COLUMN, self.globals.DATE_COLUMN]
         )
 
-        self._integrate_numbers_by_country(
-            input_column=self.globals.VALUE_COLUMN_LIST
-        )
+        self._integrate_numbers_by_country(input_column=self.globals.VALUE_COLUMN_LIST)
 
     def _integrate_numbers_by_country(self, input_column):
         """
@@ -83,9 +84,15 @@ class Corona(object):
         max_date_min_d = self.data[self.globals.DATE_COLUMN].max() - timedelta(
             days=day_range
         )
+        global_df = (
+            self.data.query(f"{self.globals.DATE_COLUMN} > @max_date_min_d")
+            .groupby(self.globals.DATE_COLUMN)
+            .agg({"cases": "sum", "deaths": "sum"})
+            .reset_index()
+        )
 
         country_list = self.globals.COUNTRY_LIST
-        return (
+        by_country_df = (
             # subset from data
             self.data.query(
                 f"{self.globals.DATE_COLUMN} > @max_date_min_d"
@@ -107,6 +114,7 @@ class Corona(object):
                 ]
             ]
         )
+        return pd.concat([global_df, by_country_df])
 
     def plot_data(self, fontsize=14, day_range=None):
         """
