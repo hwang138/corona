@@ -101,7 +101,7 @@ class Corona(object):
                 f"{self.globals.DATE_COLUMN} > @max_date_min_d"
                 f" & {self.globals.COUNTRY_COLUMN} in @country_list"
             )
-            .sort_values(by=["cumulative_cases"], ascending=False,)
+            .sort_values(by=["cumulative_cases", self.globals.DATE_COLUMN], ascending=False,)
             .reset_index()[  # extract columns of interest
                 [
                     self.globals.DATE_COLUMN,
