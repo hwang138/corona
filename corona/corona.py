@@ -32,6 +32,7 @@ class Corona(object):
             by=[self.globals.COUNTRY_COLUMN, self.globals.DATE_COLUMN]
         )
 
+        # compute global numbers
         global_df = (
             self.data.groupby(self.globals.DATE_COLUMN)
             .agg({"cases": "sum", "deaths": "sum", "pop_data2018": "sum"})
@@ -39,6 +40,7 @@ class Corona(object):
         )
         global_df[self.globals.COUNTRY_COLUMN] = "Global"
 
+        # bind it back to data
         self.data = pd.concat([self.data, global_df])
 
         self._integrate_numbers_by_country(input_column=self.globals.VALUE_COLUMN_LIST)
@@ -101,7 +103,9 @@ class Corona(object):
                 f"{self.globals.DATE_COLUMN} > @max_date_min_d"
                 f" & {self.globals.COUNTRY_COLUMN} in @country_list"
             )
-            .sort_values(by=["cumulative_cases", self.globals.DATE_COLUMN], ascending=False,)
+            .sort_values(
+                by=["cumulative_cases", self.globals.DATE_COLUMN], ascending=False,
+            )
             .reset_index()[  # extract columns of interest
                 [
                     self.globals.DATE_COLUMN,
