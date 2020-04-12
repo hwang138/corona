@@ -1,32 +1,80 @@
 import os
 import sys
 
+import numpy as np
+
+# sys.path.append parent directory
 current_dir = os.path.abspath(__file__)
 parent_dir = os.path.abspath(os.path.join(current_dir, os.pardir))
 sys.path.append(parent_dir)
-SUPPORTED_MODELS = ["simple"]
+
+# supported model types
+SUPPORTED_MODEL_TYPE_LIST = ["simple"]
+
+# some local testing X and y values
+X = np.array([[1, 1], [1, 2], [2, 2], [2, 3]])
+y = np.dot(X, np.array([1, 2])) + 3
+
 
 class Model(object):
     def __init__(self, model_type="simple"):
-        if model_type not in SUPPORTED_MODELS:
-            raise ValueError(f"Supported models: {SUPPORTED_MODELS}")
+        if model_type not in SUPPORTED_MODEL_TYPE_LIST:
+            raise ValueError(f"Supported models: {SUPPORTED_MODEL_TYPE_LIST}")
         self.model_type = model_type
         self.model = self.initialize_model()
 
     def initialize_model(self):
+        """
+        Initialize model based on self.model_type
+        
+        Returns
+        -------
+        the {model_type}.py script
+        """
 
         if self.model_type == "simple":
             from src import simple_model
+
             return simple_model
 
-    def fit_model(self, X, y):
+    def fit(self, X, y):
+        """
+        Fit the model.
+        
+        Parameters
+        ----------
+        X: np.ndarray
+            design matrix
+        y: np.ndarray
+            response vector
+            
+        Returns
+        -------
+        - self.training_data: dict with X and y keys
+        - self.model.fitted_model
+        """
         self.training_data = {"X": X, "y": y}
-        self.model.fit_model(X=X, y=y)
+        self.model.fit(self, X, y)
+
+    def score(self, X, y):
+        """ compute score of the fitted_model """
+        return self.model.fitted_model.score(X, y)
 
     def predict(self, X=None):
+        """
+        
+        Parameters
+        ----------
+        X: np.ndarray (default: self.training_data["X"])
+            design matrix
+
+        Returns
+        -------
+        np.ndarray of preditions
+        """
         if X is None:
             X = self.training_data["X"]
 
         self.prediction_data = {"X": X}
 
-        self.model.predict(X=X)
+        return self.model.predict(self, X)
