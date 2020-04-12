@@ -103,7 +103,10 @@ class Corona(object):
                 ascending=False,
             )
             .reset_index()[
-                # extract columns of interest
+
+            ]
+        )
+        return (pd.concat([global_df, by_country_df])# extract columns of interest
                 [
                     self.globals.DATE_COLUMN,
                     self.globals.COUNTRY_COLUMN,
@@ -111,10 +114,7 @@ class Corona(object):
                     "cumulative_cases",
                     "deaths",
                     "cumulative_deaths",
-                ]
-            ]
-        )
-        return pd.concat([global_df, by_country_df])
+                ])
 
     def plot_data(self, fontsize=14, day_range=None):
         """
