@@ -25,3 +25,17 @@ https://www.ecdc.europa.eu/en/publications-data/download-todays-data-geographic-
     - bash script to run corona_19_visualization.ipynb
 - [scheduled_run.sh](./scripts/scheduled_run.sh)
     - bash script to run on a 6 hr schedule
+
+**Update log**    
+- 2020-04-11
+    - initial commit
+- 2020-04-12
+    - add global case and death numbers
+
+**TODO(s)**
+- pull data from CDC or some other source with finer spatil resolution that countries (especially the US)
+- build out basic projection model: use past 3 day case & death numbers to project 3 days out
+- build out [SIR](https://scipython.com/book/chapter-8-scipy/additional-examples/the-sir-epidemic-model/)
+model for proections by country
+    - pull country/state population & population density
+    - ...
