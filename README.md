@@ -1,12 +1,15 @@
 # Covid-19 global case and death number tracking
-Author: Chris Hwang
-
+Author: Chris Hwang<br>
 GitHub: [link](https://github.com/hwang138/corona)
+
+**Python version and dependencies**<br>
+- version=3.6
+- [dependencies](./environment.sh)
 
 This report uses data from the European Centre for Disease Prevention and Control [(ecdc)](
 https://www.ecdc.europa.eu/en/geographical-distribution-2019-ncov-cases
 )
-    
+
 To donwload the csv file yourself: [link](
 https://www.ecdc.europa.eu/en/publications-data/download-todays-data-geographic-distribution-covid-19-cases-worldwide
 )
