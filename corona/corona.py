@@ -7,7 +7,8 @@ import pandas as pd
 
 # sys.path.append
 current_dir = os.path.abspath(__file__)
-sys.path.append(current_dir)
+parent_dir = os.path.abspath(os.path.join(current_dir, os.pardir))
+sys.path.append(parent_dir)
 from src import corona_gobals
 from src import plotting_utils
 from src import utils
