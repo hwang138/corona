@@ -37,7 +37,7 @@ class Model(object):
 
             return simple_model
 
-    def fit(self, X, y):
+    def fit(self, X, y, verbose=False):
         """
         Fit the model.
         
@@ -55,9 +55,17 @@ class Model(object):
         """
         self.training_data = {"X": X, "y": y}
         self.model.fit(self, X, y)
+        self.score(verbose=verbose)
 
-    def score(self, X, y):
-        """ compute score of the fitted_model """
+    def score(self, X=None, y=None, verbose=False):
+        """ Compute R^2 of the fitted_model """
+        if (X is None) & (y is None):
+            X = self.training_data["X"]
+            y = self.training_data["y"]
+
+        if verbose:
+            print(f"Fit R^2: {self.score()}")
+
         return self.model.fitted_model.score(X, y)
 
     def predict(self, X=None):
@@ -77,4 +85,4 @@ class Model(object):
 
         self.prediction_data = {"X": X}
 
-        return self.model.predict(self, X)
+        return self.model.fitted_model.predict(X)
