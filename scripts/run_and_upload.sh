@@ -1,6 +1,8 @@
 # Description: Script to run corona_19_visualization.ipynb and upload back to git
 # Author: Chris Hwang
 
+conda activate corona
+
 # use nbconvert to execute the notebook
 jupyter nbconvert --to notebook --execute  ./corona_19_visualization.ipynb
 
