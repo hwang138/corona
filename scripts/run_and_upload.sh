@@ -1,6 +1,7 @@
 # Description: Script to run corona_19_visualization.ipynb and upload back to git
 # Author: Chris Hwang
 git checkout master
+git pull
 # use nbconvert to execute the notebook
 jupyter nbconvert --to notebook --execute  ./corona_19_visualization.ipynb
 
