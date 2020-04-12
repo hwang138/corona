@@ -5,6 +5,6 @@ iter=0
 while (( $iter < 1 ))
 do
   bash ./scripts/run_and_upload.sh
-  # sleep for 12 hrs
-  sleep 43200
+  # sleep for 6 hrs
+  sleep 21600
 done

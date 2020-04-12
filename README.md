@@ -21,4 +21,4 @@ https://www.ecdc.europa.eu/en/publications-data/download-todays-data-geographic-
 - [run_and_upload.sh](./scripts/run_and_upload.sh)
     - bash script to run corona_19_visualization.ipynb
 - [scheduled_run.sh](./scripts/scheduled_run.sh)
-    - bash script to run on a 12 hr schedule
+    - bash script to run on a 6 hr schedule
