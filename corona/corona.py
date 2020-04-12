@@ -1,19 +1,27 @@
+import os
+import sys
+
 from datetime import timedelta
 
 import pandas as pd
 
-from corona.src import corona_gobals
-from corona.src import plotting_utils
-from corona.src import utils
+# sys.path.append
+current_dir = os.path.abspath(__file__)
+sys.path.append(current_dir)
+from src import corona_gobals
+from src import plotting_utils
+from src import utils
+from src.model.model import Model
 
 
 class Corona(object):
-    def __init__(self):
+    def __init__(self, model_type="simple_model"):
         self.description = "COVID-19 analysis class"
         self.globals = corona_gobals
         self.plotting_utils = plotting_utils
         self.utils = utils
         self.pull_latest_data()
+        self.model = Model()
 
     def pull_latest_data(self, verbose=True):
         """
