@@ -90,6 +90,7 @@ class Corona(object):
             .agg({"cases": "sum", "deaths": "sum"})
             .reset_index()
         )
+        global_df[self.globals.COUNTRY_COLUMN] = "Global"
 
         country_list = self.globals.COUNTRY_LIST
         by_country_df = (
@@ -102,19 +103,20 @@ class Corona(object):
                 by=[self.globals.COUNTRY_COLUMN, self.globals.DATE_COLUMN],
                 ascending=False,
             )
-            .reset_index()[
-
+            .reset_index()
+        )
+        return (
+            pd.concat([global_df, by_country_df])
+            # extract columns of interest
+            [
+                self.globals.DATE_COLUMN,
+                self.globals.COUNTRY_COLUMN,
+                "cases",
+                "cumulative_cases",
+                "deaths",
+                "cumulative_deaths",
             ]
         )
-        return (pd.concat([global_df, by_country_df])# extract columns of interest
-                [
-                    self.globals.DATE_COLUMN,
-                    self.globals.COUNTRY_COLUMN,
-                    "cases",
-                    "cumulative_cases",
-                    "deaths",
-                    "cumulative_deaths",
-                ])
 
     def plot_data(self, fontsize=14, day_range=None):
         """
