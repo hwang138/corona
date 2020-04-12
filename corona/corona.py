@@ -26,7 +26,7 @@ class Corona(object):
 
         print("###############" "\nData Processing" "\n###############")
         self.data = self.data.sort_values(
-            by=[globals.COUNTRY_COLUMN, globals.DATE_COLUMN]
+            by=[self.globals.COUNTRY_COLUMN, self.globals.DATE_COLUMN]
         )
 
         self._integrate_numbers_by_country(
@@ -53,8 +53,8 @@ class Corona(object):
 
         for input_column in input_column_list:
             new_key = f"cumulative_{input_column}"
-            for country in self.data[globals.COUNTRY_COLUMN].unique():
-                mask = self.data[globals.COUNTRY_COLUMN] == country
+            for country in self.data[self.globals.COUNTRY_COLUMN].unique():
+                mask = self.data[self.globals.COUNTRY_COLUMN] == country
 
                 # use integrate_numbers to add daily values with the same 1-D array length
                 self.data.loc[mask, new_key] = self.utils.integrate_numbers(
@@ -143,9 +143,9 @@ class Corona(object):
         ]:
             country_list = self.globals.COUNTRY_LIST
             self.plotting_utils.plot_time_series(
-                data=self.data.query(
+                df=self.data.query(
                     f"{self.globals.DATE_COLUMN} > @max_date_min_d"
-                    f"{self.globals.COUNTRY_COLUMN} in @country_list"
+                    f"& {self.globals.COUNTRY_COLUMN} in @country_list"
                 ),
                 x=self.globals.DATE_COLUMN,
                 y=y_list,
