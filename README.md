@@ -34,8 +34,7 @@ https://www.ecdc.europa.eu/en/publications-data/download-todays-data-geographic-
 
 **TODO(s)**
 - pull data from CDC or some other source with finer spatil resolution that countries (especially the US)
-- build out basic projection model: use past 3 day case & death numbers to project 3 days out
-- build out [SIR](https://scipython.com/book/chapter-8-scipy/additional-examples/the-sir-epidemic-model/)
+- `current branch`build out [SIR](https://scipython.com/book/chapter-8-scipy/additional-examples/the-sir-epidemic-model/)
 model for proections by country
     - pull country/state population & population density
     - ...
